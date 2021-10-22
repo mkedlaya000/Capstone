@@ -1,8 +1,8 @@
-pip install python-whois
-pip install futures
 import python-whois
 import whois
 import datetime
+from bs4 import BeautifulSoup
+import urllib
 
 def domain_registration(url):
     w = whois.whois(url)
@@ -24,14 +24,6 @@ def age_of_domain(url):
     else:
         return 1
 
->>> import seolib 
->>> alexa_rank = seolib.get_alexa('http://google.com')
->>> print alexa_rank
-
-pip install beautifulsoup4
-from bs4 import BeautifulSoup
-pip install urllib3
-import urllib
 def Links_in_tags(url):
     opener = urllib.request.urlopen(url).read()
     soup = BeautifulSoup(opener, 'lxml')
@@ -58,3 +50,11 @@ def Links_in_tags(url):
         return 0
     else:
         return 1        
+
+def get_features(url):
+    features = {
+        "domain_registration": domain_registration(url),
+        "age_of_domain": age_of_domain(url),
+        "Links_in_tags": Links_in_tags(url)
+    }
+    return features
